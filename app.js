@@ -4,6 +4,13 @@ const express = require('express');
 const app = express();
 
 app.use(express.json());
+app.get('/webhooked', (req, res) => {
+        res.send('<h1>Welcome to the  Page!</h1><p>This is a simple page.</p>');
+    });
+    app.get('/', (req, res) => {
+        res.send('Hello World!');
+      });
+    
 
 app.post('/webhooked', async (req, res) => {
     console.log('Received webhook:', req.body);
@@ -14,12 +21,7 @@ app.post('/webhooked', async (req, res) => {
     const postData = {
         description: req.body.Summary    //message //"Regular maintenance"  // Static description as per your example
     };
-    app.get('/webhooked', (req, res) => {
-        res.send('<h1>Welcome to the  Page!</h1><p>This is a simple page.</p>');
-    });
-    app.get('/', (req, res) => {
-        res.send('Hello World!');
-      });
+    
     try {
         const response = await axios.post(apiUrl, postData, {
             headers: {
