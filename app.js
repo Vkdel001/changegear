@@ -22,7 +22,7 @@ app.post('/webhooked', async (req, res) => {
     const postData = {
         description: req.body.Summary    //message //"Regular maintenance"  // Static description as per your example
     };
-    console.log(description);
+   
     try {
         const response = await axios.post(apiUrl, postData, {
             headers: {
