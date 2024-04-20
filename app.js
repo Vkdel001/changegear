@@ -22,7 +22,7 @@ app.post('/webhooked', async (req, res) => {
     const postData = {
         description: req.body.Summary    //message //"Regular maintenance"  // Static description as per your example
     };
-    
+    console.log(description);
     try {
         const response = await axios.post(apiUrl, postData, {
             headers: {
@@ -49,4 +49,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
         console.log('Bearer Token:', process.env.BEARER_TOKEN);
+        
 });
