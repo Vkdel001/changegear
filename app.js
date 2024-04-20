@@ -11,6 +11,7 @@ app.get('/webhooked', (req, res) => {
         res.send('Hello World!');
       });
     
+console.log('Bearer Token:', process.env.BEARER_TOKEN);
 
 app.post('/webhooked', async (req, res) => {
     console.log('Received webhook:', req.body);
