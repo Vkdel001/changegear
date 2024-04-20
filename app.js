@@ -20,7 +20,7 @@ app.post('/webhooked', async (req, res) => {
     const bearerToken = process.env.BEARER_TOKEN;  // Ensure the BEARER_TOKEN is set in your environment variables
 
     const postData = {
-        description: req.body.Summary    //message //"Regular maintenance"  // Static description as per your example
+        description: req.body.Entity.Summary    //message //"Regular maintenance"  // Static description as per your example
     };
         console.log(postData);   
     try {
