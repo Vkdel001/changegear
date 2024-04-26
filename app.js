@@ -4,25 +4,29 @@ const express = require('express');
 const app = express();
 
 app.use(express.json());
-app.get('/webhooked', (req, res) => {
-        res.send('<h1>Welcome to the  Page!</h1><p>This is a simple page.</p>');
-    });
-    app.get('/', (req, res) => {
-        res.send('Hello World!');
-      });
-    
 
+app.get('/webhooked', (req, res) => {
+    res.send('<h1>Welcome to the  Page!</h1><p>This is a simple page.</p>');
+});
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+  });
 
 app.post('/webhooked', async (req, res) => {
     console.log('Received webhook:', req.body);
 
+    if (req.body.Entity.AssignedTo === 660) {
     const apiUrl = 'https://api.planadoapp.com/v2/jobs';
-    const bearerToken = process.env.BEARER_TOKEN;  // Ensure the BEARER_TOKEN is set in your environment variables
+    const bearerToken = process.env.BEARER_TOKEN;  // env variables
 
     const postData = {
-        description: req.body.Entity.Summary    //message //"Regular maintenance"  // Static description as per your example
+      //  client: {
+        //    organization: true, 
+        //    organization_name: req.body.Entity.Company  
+     //   },
+        description: req.body.Entity.Summary    
     };
-        console.log(postData);   
+    
     try {
         const response = await axios.post(apiUrl, postData, {
             headers: {
@@ -43,11 +47,18 @@ app.post('/webhooked', async (req, res) => {
             error: error.message
         });
     }
+}   
+else {
+    // If UDF_section is not 2, do not process the webhook for external API
+    res.status(200).json({
+        message: 'Webhook received but not processed due to UDF_section condition'
+    });
+}
 });
+
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
-        console.log('Bearer Token:', process.env.BEARER_TOKEN);
-        
 });
