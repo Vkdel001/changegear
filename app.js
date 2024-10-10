@@ -24,6 +24,9 @@ app.post('/webhooked', async (req, res) => {
         //    organization: true, 
         //    organization_name: req.body.Entity.Company  
      //   },
+        template: {
+            name: 'Fault Troubleshooting'  // Add the template name here
+        },
         description: req.body.Entity.Summary    
     };
     
