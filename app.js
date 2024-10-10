@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 app.post('/webhooked', async (req, res) => {
     console.log('Received webhook:', req.body);
 
-    if (req.body.Entity.AssignedTo === 660) {
+    if (req.body.Entity.AssignedTo != 660) {
     const apiUrl = 'https://api.planadoapp.com/v2/jobs';
     const bearerToken = process.env.BEARER_TOKEN;  // env variables
 
