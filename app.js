@@ -27,7 +27,12 @@ app.post('/webhooked', async (req, res) => {
         template: {
             name: 'IR'  // Add the template name here
         },
-        description: req.body.Entity.Summary    
+        description: req.body.Entity.Summary ,
+        "address": {
+
+            "formatted": req.body.Entity.Summary
+  }
+
     };
     
     try {
